@@ -53,7 +53,7 @@ kmeansAux :: [Vec] -> [[Vec]] -> [[Vec]]
 kmeansAux points pgroups = let pss = kmeansStep points pgroups in
   case pss == pgroups of
   True -> pgroups
-  False -> kmeansStep points pss   
+  False -> kmeansAux points pss   
 
 -- | Performs the k-means clustering algorithm
 --   using trying to use 'k' clusters on the given list of points
