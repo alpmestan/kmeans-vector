@@ -1,30 +1,25 @@
 Name:                kmeans-vector
 Version:             0.2
 Synopsis:            An implementation of the kmeans clustering algorithm based on the vector package
-Description:         Provides a simple (but efficient) implementation of the k-means clustering algorithm. The goal of this algorithm is to, given a list of n-dimensional points, regroup them in k groups, such that each point gets to be in the group to which it is the closest to (using the 'center' of the group). 
-		     .
-		     Sample output (after some gnuplot hackery -- see the tests dir in the repository): <http://i.imgur.com/IpIPC.png>
-		     .
-		     Expect some improvements on the initial clustering, thus resulting in a better clustering, for future versions.
+Description:         Provides a simple (but efficient) implementation of the k-means clustering algorithm. The goal of this algorithm is to, given a list of n-dimensional points, regroup them in k groups, such that each point gets to be in the group to which it is the closest to (using the 'center' of the group).
+                     .
+                     CHANGELOG
+                     .
+                     kmeans-vector-0.2 supports having feature vectors associated to objects, and thus computing kmeans on these vectors, letting you recover the initial objects.
 
--- URL for the project homepage or repository.
 Homepage:            http://github.com/alpmestan/kmeans-vector
+
 Bug-reports:	     https://github.com/alpmestan/kmeans-vector/issues
--- The license under which the package is released.
+
 License:             BSD3
 
--- The file containing the license text.
 License-file:        LICENSE
 
--- The package author(s).
-Author:              Alp Mestanogullari <alpmestan@gmail.com>
+Author:              Alp Mestanogullari <alpmestan@gmail.com>, Ville Tirronen
 
--- An email address to which users can send suggestions, bug reports,
--- and patches.
 Maintainer:          Alp Mestanogullari <alpmestan@gmail.com>
 
--- A copyright notice.
-Copyright:           2011 Alp Mestanogullari
+Copyright:           2011-2012 Alp Mestanogullari
 
 Stability:	     Experimental
 
@@ -32,29 +27,14 @@ Category:            Math
 
 Build-type:          Simple
 
--- Extra files to be distributed with the package, such as examples or
--- a README.
--- Extra-source-files:  
-
--- Constraint on the version of Cabal needed to build this package.
 Cabal-version:       >=1.6
 
-
 Library
-  -- Modules exported by the library.
   Exposed-modules:     Math.KMeans
-  
-  -- Packages needed in order to build this package.
   Build-depends:       base >= 4 && < 5, vector >= 0.7
   ghc-prof-options:    -prof -auto-all
   ghc-options: 	       -O2 -funbox-strict-fields
-  
-  -- Modules not exported by this package.
-  -- Other-modules:       
-  
-  -- Extra tools (e.g. alex, hsc2hs, ...) needed to build the source.
-  -- Build-tools:         
-  
+
 source-repository head
   type: git
   location: http://github.com/alpmestan/kmeans-vector.git
