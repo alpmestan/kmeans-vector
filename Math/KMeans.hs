@@ -2,27 +2,21 @@
 
 {- |
 Module      :  Math.KMeans
-Copyright   :  (c) Alp Mestanogullari, 2011
+Copyright   :  (c) Alp Mestanogullari, Ville Tirronen, 2011-2012
 License     :  BSD3
-Maintainer  :  alpmestan@gmail.com
+Maintainer  :  Alp Mestanogullari <alpmestan@gmail.com>
 Stability   :  experimental
 
 An implementation of the k-means clustering algorithm based on the efficient vector package.
 
 -}
 
-module Math.KMeans (kmeans, Point, Cluster(..), computeClusters) where
+module Math.KMeans (kmeans, Point) where
 
 import qualified Data.Vector.Unboxed as V
 import qualified Data.Vector as G
 import qualified Data.List as L
 import Data.Function (on)
-import Debug.Trace
-import qualified Data.Vector.Mutable as M
-import Control.Monad.ST
-
--- import Control.Monad
--- import Test.QuickCheck
 
 --- * K-Means clustering algorithm
 
