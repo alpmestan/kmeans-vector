@@ -11,7 +11,7 @@ An implementation of the k-means clustering algorithm based on the efficient vec
 
 -}
 
-module Math.KMeans (kmeans, Point) where
+module Math.KMeans (kmeans, Point, Cluster(..), computeClusters) where
 
 import qualified Data.Vector.Unboxed as V
 import qualified Data.Vector as G
@@ -20,13 +20,13 @@ import Data.Function (on)
 
 --- * K-Means clustering algorithm
 
-type Vec = V.Vector Double
+-- | Type holding an object of any type and its associated feature vector
+type Point a = (V.Vector Double, a)
 
-type Point a = (Vec,a)
-
+-- | Type representing a cluster (group) of vectors by its center and an id
 data Cluster = Cluster {
   cid :: !Int,
-  center :: !Vec
+  center :: !(V.Vector Double)
   } -- deriving (Show,Eq)
 
 -- genVec = V.fromList `fmap` vectorOf 3 arbitrary
@@ -44,7 +44,7 @@ data Cluster = Cluster {
 
 
 {-#INLINE distance#-}
-distance :: Point a -> Vec -> Double
+distance :: Point a -> V.Vector Double -> Double
 distance (u,_) v = V.sum $ V.zipWith (\a b -> (a - b)^2) u v
 
 partition :: Int -> [a] -> [[a]]
@@ -55,7 +55,7 @@ partition k vs = go vs
         n = (length vs + k - 1) `div` k
 
 {-#INLINE computeClusters#-}
-computeClusters :: [[Vec]] -> [Cluster]
+computeClusters :: [[V.Vector Double]] -> [Cluster]
 computeClusters = zipWith Cluster [0..] . map f
   where f (x:xs) = let (n, v) = L.foldl' (\(k, s) v' -> (k+1, V.zipWith (+) s v')) (1, x) xs
                    in V.map (\x -> x / (fromIntegral n)) v
