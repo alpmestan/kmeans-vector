@@ -2,6 +2,8 @@
 
 kmeans-vector is a Haskell library to perform the k-means clustering algorithm. It is based on the very efficient 'vector' library.
 
+[![Build Status](https://secure.travis-ci.org/alpmestan/kmeans-vector.png?branch=master)](http://travis-ci.org/alpmestan/kmeans-vector)
+
 Feel free to contribute, may it be features, performance improvements, etc.
 
 Performances (0.1 version)
