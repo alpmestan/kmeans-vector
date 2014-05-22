@@ -8,32 +8,36 @@ Description:         Provides a simple (but efficient) implementation of the k-m
                      kmeans-vector-0.2 supports having feature vectors associated to objects, and thus computing kmeans on these vectors, letting you recover the initial objects.
 
 Homepage:            http://github.com/alpmestan/kmeans-vector
-
-Bug-reports:	     https://github.com/alpmestan/kmeans-vector/issues
-
+Bug-reports:	       https://github.com/alpmestan/kmeans-vector/issues
 License:             BSD3
-
 License-file:        LICENSE
-
 Author:              Alp Mestanogullari <alpmestan@gmail.com>, Ville Tirronen
-
 Maintainer:          Alp Mestanogullari <alpmestan@gmail.com>
-
 Copyright:           2011-2012 Alp Mestanogullari
-
-Stability:	     Experimental
-
+Stability:	         Experimental
 Category:            Math
-
 Build-type:          Simple
+Cabal-version:       >=1.8
 
-Cabal-version:       >=1.6
+library
+  Exposed-modules:   Math.KMeans
+  Build-depends:     base >= 4 && < 5, vector >= 0.7
+  ghc-prof-options:  -prof -auto-all
+  ghc-options: 	     -O2 -funbox-strict-fields
 
-Library
-  Exposed-modules:     Math.KMeans
-  Build-depends:       base >= 4 && < 5, vector >= 0.7
-  ghc-prof-options:    -prof -auto-all
-  ghc-options: 	       -O2 -funbox-strict-fields
+executable kmeans-persons
+  main-is:           persons.hs
+  hs-source-dirs:    examples
+  ghc-options:       -O2 -funbox-strict-fields
+  build-depends:     base >= 4 && < 5, vector >= 0.7, kmeans-vector, QuickCheck
+
+benchmark bench
+  main-is:           bench.hs
+  other-modules:     OldKmeans
+  hs-source-dirs:    bench
+  ghc-options:       -O2 -funbox-strict-fields
+  type:              exitcode-stdio-1.0
+  build-depends:     base >= 4 && < 5, vector >= 0.7, kmeans-vector, criterion, QuickCheck
 
 source-repository head
   type: git
