@@ -2,7 +2,7 @@
 
 {- |
 Module      :  Math.KMeans
-Copyright   :  (c) Alp Mestanogullari, Ville Tirronen, 2011-2012
+Copyright   :  (c) Alp Mestanogullari, Ville Tirronen, 2011-2014
 License     :  BSD3
 Maintainer  :  Alp Mestanogullari <alpmestan@gmail.com>
 Stability   :  experimental
@@ -25,7 +25,7 @@ type Point a = (V.Vector Double, a)
 
 -- | Type representing a cluster (group) of vectors by its center and an id
 data Cluster = Cluster {
-  cid :: !Int,
+  cid :: {-# UNPACK #-} !Int,
   center :: !(V.Vector Double)
   } -- deriving (Show,Eq)
 
@@ -66,7 +66,7 @@ regroupPoints clusters points = L.filter (not.null) . G.toList . G.accum (flip (
  where
    closest p = (cid (L.minimumBy (compare `on` (distance p . center)) clusters),p)
 
-regroupPoints' :: forall a. [Cluster] -> [Point a] -> [[Point a]]
+regroupPoints' :: [Cluster] -> [Point a] -> [[Point a]]
 regroupPoints' clusters points = go points
   where go points = map (map snd) . L.groupBy ((==) `on` fst) . L.sortBy (compare `on` fst) $ map (\p -> (closest p, p)) points
         closest p = cid $ L.minimumBy (compare `on` (distance p . center)) clusters
@@ -81,9 +81,9 @@ kmeansAux points pgroups = let pss = kmeansStep points pgroups in
   False -> kmeansAux points pss
 
 -- | Performs the k-means clustering algorithm
---   using trying to use 'k' clusters on the given list of points
+--   trying to use 'k' clusters on the given list of points
 kmeans :: Int -> [Point a] -> [[Point a]]
 kmeans k points = kmeansAux points pgroups
   where pgroups = partition k points
-
+{-# INLINE kmeans #-}
 
