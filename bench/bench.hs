@@ -39,7 +39,7 @@ instance Arbitrary Person where
 	arbitrary = do
 		Person <$> choose (2, 100)
 			   <*> choose (5, 150)
-			   <*> pure ""
+			   <*> pure "francis"
 			   <*> choose (500, 100000)
 
 persons :: Gen [Person]

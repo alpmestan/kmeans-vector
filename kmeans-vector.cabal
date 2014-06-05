@@ -6,14 +6,15 @@ Description:         Provides a simple (but efficient) implementation of the k-m
                      CHANGELOG
                      .
                      0.2: supports having feature vectors associated to objects, and thus computing kmeans on these vectors, letting you recover the initial objects.
-                     0.3: total rewrite of the code, the code scales much better on big inputs
+                     0.3: total rewrite of the code, the code scales much better on big inputs and is overall
+                     consistently faster.
 Homepage:            http://github.com/alpmestan/kmeans-vector
 Bug-reports:	       https://github.com/alpmestan/kmeans-vector/issues
 License:             BSD3
 License-file:        LICENSE
 Author:              Alp Mestanogullari <alpmestan@gmail.com>, Ville Tirronen
 Maintainer:          Alp Mestanogullari <alpmestan@gmail.com>
-Copyright:           2011-2012 Alp Mestanogullari
+Copyright:           2011-2014 Alp Mestanogullari
 Stability:	         Experimental
 Category:            Math
 Build-type:          Simple
@@ -21,9 +22,9 @@ Cabal-version:       >=1.8
 
 library
   Exposed-modules:   Math.KMeans
-  Build-depends:     base >= 4 && < 5, vector >= 0.7
+  Build-depends:     base >= 4 && < 5, vector >= 0.7, mtl >= 2.1 && <2.2
   ghc-prof-options:  -prof -auto-all
-  ghc-options: 	     -O2 -funbox-strict-fields
+  ghc-options: 	     -O2 -funbox-strict-fields -Wall
 
 executable kmeans-persons
   main-is:           persons.hs
