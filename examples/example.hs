@@ -20,11 +20,11 @@ doubleGen2 = normal 1500 0.1
 
 main :: IO ()
 main = do
-    v1s <- mwc $ listOf 5 (oneVecOf doubleGen1)
-    v2s <- mwc $ listOf 5 (oneVecOf doubleGen2)
+    v1s <- mwc $ listOf 500 (oneVecOf doubleGen1)
+    v2s <- mwc $ listOf 500 (oneVecOf doubleGen2)
     let input = v1s ++ v2s
 
     let clusters = runKMeans input
+    G.mapM_ print clusters
     putStrLn $ show (G.length clusters)
             ++ " cluster(s) found."
-    G.mapM_ print clusters
