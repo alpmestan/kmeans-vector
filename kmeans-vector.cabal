@@ -26,11 +26,11 @@ library
   ghc-prof-options:  -prof -auto-all
   ghc-options: 	     -O2 -funbox-strict-fields -Wall
 
-executable kmeans-persons
-  main-is:           persons.hs
+executable kmeans-example
+  main-is:           example.hs
   hs-source-dirs:    examples
   ghc-options:       -O2 -funbox-strict-fields
-  build-depends:     base >= 4 && < 5, vector >= 0.7, kmeans-vector, QuickCheck
+  build-depends:     base >= 4 && < 5, vector >= 0.7, kmeans-vector, probable
 
 benchmark bench
   main-is:           bench.hs
