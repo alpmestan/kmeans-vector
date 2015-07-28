@@ -1,15 +1,24 @@
 language: haskell
 
-script:
-  - cabal install --only-dependencies && cabal configure && cabal build
+env:
+  - CABALVER=1.18 GHCVER=7.6.3
+  - CABALVER=1.18 GHCVER=7.8.4
+  - CABALVER=1.22 GHCVER=7.10.1
 
 before_install:
-  - cabal update
+ - travis_retry sudo add-apt-repository -y ppa:hvr/ghc
+ - travis_retry sudo apt-get update
+ - travis_retry sudo apt-get install cabal-install-$CABALVER ghc-$GHCVER
+ - export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$PATH
+ - travis_retry cabal update
 
-install:
-  - cabal install --only-dependencies
-  
 notifications:
-  email:
-      - alpmestan@gmail.com
-  irc: "irc.freenode.org#hnn"
+  irc:
+    channels:
+      - "irc.freenode.org#haskell-math"
+    template:
+      - "%{repository}#%{build_number} - %{commit} on %{branch} by %{author}: %{message}"
+      - "Build details: %{build_url} - Change view: %{compare_url}"
+    skip_join: true
+    on_success: always
+    on_failure: always

@@ -2,7 +2,7 @@
 
 {- |
 Module      :  Math.KMeans
-Copyright   :  (c) Alp Mestanogullari, Ville Tirronen, 2011-2014
+Copyright   :  (c) Alp Mestanogullari, Ville Tirronen, 2011-2015
 License     :  BSD3
 Maintainer  :  Alp Mestanogullari <alpmestan@gmail.com>
 Stability   :  experimental
@@ -152,13 +152,14 @@ kmeansWith initF extract dist k points = go `liftM` initF k points
 
     -- centroidsOf :: Clusters a -> Centroids
     centroidsOf cs = G.map centroidOf cs
-      where 
-        n = fromIntegral $ G.length cs
+      where
 
         centroidOf (Cluster elts) = 
             V.map (/n) 
           . L.foldl1' addCentroids
           $ map extract elts
+
+          where n = fromIntegral (length elts)
 
     -- pairToClosestCentroid :: Centroids -> a -> (Int, a)
     pairToClosestCentroid cs a = (minDistIndex, a)

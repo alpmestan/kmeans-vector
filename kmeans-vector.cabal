@@ -1,5 +1,5 @@
 Name:                kmeans-vector
-Version:             0.3
+Version:             0.3.1
 Synopsis:            An implementation of the kmeans clustering algorithm based on the vector package
 Description:         Provides a simple (but efficient) implementation of the k-means clustering algorithm. The goal of this algorithm is to, given a set of n-dimensional points, regroup them in k groups, such that each point gets to be in the group to which it is the closest to (using the 'center' of the group).
                      .
@@ -14,7 +14,7 @@ License:             BSD3
 License-file:        LICENSE
 Author:              Alp Mestanogullari <alpmestan@gmail.com>, Ville Tirronen
 Maintainer:          Alp Mestanogullari <alpmestan@gmail.com>
-Copyright:           2011-2014 Alp Mestanogullari
+Copyright:           2011-2015 Alp Mestanogullari
 Stability:	         Experimental
 Category:            Math
 Build-type:          Simple
