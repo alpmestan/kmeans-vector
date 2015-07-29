@@ -34,7 +34,7 @@ executable kmeans-example
 
 benchmark bench
   main-is:           bench.hs
-  other-modules:     OldKmeans
+  other-modules:     OldKMeans
   hs-source-dirs:    bench
   ghc-options:       -O2 -funbox-strict-fields
   type:              exitcode-stdio-1.0
