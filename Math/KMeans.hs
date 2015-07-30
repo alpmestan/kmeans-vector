@@ -1,3 +1,6 @@
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE BangPatterns #-}
 
 {- |
@@ -37,6 +40,12 @@ import qualified Data.Vector as G
 import qualified Data.List as L
 import Data.Function (on)
 
+#if !MIN_VERSION_base(4, 8, 0)
+import Data.Foldable
+import Data.Monoid
+import Data.Traversable
+#endif
+
 -- | A distance on vectors
 type Distance = V.Vector Double -> V.Vector Double -> Double
 
@@ -68,9 +77,9 @@ type Clusters a = G.Vector (Cluster a)
 type Centroids  = G.Vector (V.Vector Double)
 
 -- | A 'Cluster' of points is just a list of points
-newtype Cluster a = 
+newtype Cluster a =
   Cluster { elements :: [a] -- ^ elements that belong to that cluster
-          } deriving (Eq, Show)
+          } deriving (Eq, Show, Functor, Monoid, Foldable, Traversable)
 
 clusterAdd :: Cluster a -> a -> Cluster a
 clusterAdd (Cluster c) x = Cluster (x:c)
