@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE BangPatterns #-}
@@ -38,6 +39,12 @@ import qualified Data.Vector.Unboxed as V
 import qualified Data.Vector as G
 import qualified Data.List as L
 import Data.Function (on)
+
+#if !MIN_VERSION_base(4, 8, 0)
+import Data.Foldable
+import Data.Monoid
+import Data.Traversable
+#endif
 
 -- | A distance on vectors
 type Distance = V.Vector Double -> V.Vector Double -> Double
