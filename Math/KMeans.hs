@@ -1,3 +1,5 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE BangPatterns #-}
 
 {- |
@@ -68,9 +70,9 @@ type Clusters a = G.Vector (Cluster a)
 type Centroids  = G.Vector (V.Vector Double)
 
 -- | A 'Cluster' of points is just a list of points
-newtype Cluster a = 
+newtype Cluster a =
   Cluster { elements :: [a] -- ^ elements that belong to that cluster
-          } deriving (Eq, Show)
+          } deriving (Eq, Show, Functor, Monoid, Foldable, Traversable)
 
 clusterAdd :: Cluster a -> a -> Cluster a
 clusterAdd (Cluster c) x = Cluster (x:c)
